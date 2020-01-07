@@ -16,9 +16,9 @@ class App extends Component {
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
-        { name: 'Max', age: 33 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 50 }
+        { id: 'sdfsdf', name: 'Max', age: 33 }, //add id for unique key
+        { id: 'dtretr', name: event.target.value, age: 29 },
+        { id: 'fhdfgh', name: 'Stephanie', age: 50 }
       ]
     })
   }
@@ -53,7 +53,8 @@ class App extends Component {
          return <Person
          click={() => this.deletePersonHandler(index)}
          name={person.name}
-         age={person.age} />
+         age={person.age}
+         key={person.id}/>//key needs to be unique so use or make an id
        })}
        </div>
     )}
