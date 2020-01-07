@@ -50,14 +50,14 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-    let persons = null;
+    let persons = null; //create variables to use in your jsx
 
     if (this.state.showPersons){
     persons = (
       <div>
-       {this.state.persons.map((person, index) => {
+       {this.state.persons.map((person, index) => { //with lists use map operator
          return <Person
-         click={() => this.deletePersonHandler(index)}
+         click={() => this.deletePersonHandler(index)} //use index to delete something from a list
          name={person.name}
          age={person.age}
          key={person.id}//key needs to be unique so use or make an id
