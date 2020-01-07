@@ -5,22 +5,28 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 30 }
+      { id: 'sdfsdf', name: 'Max', age: 28 }, //add id for unique key
+      { id: 'dtretr', name: 'Manu', age: 29 },
+      { id: 'fhdfgh', name: 'Stephanie', age: 30 }
     ],
     otherState: 'some other value',
     showPersons: false //if false we don't want to show the persons
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { id: 'sdfsdf', name: 'Max', age: 33 }, //add id for unique key
-        { id: 'dtretr', name: event.target.value, age: 29 },
-        { id: 'fhdfgh', name: 'Stephanie', age: 50 }
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    }; //you can also do this like so: const person = Object.assign({}, this.state.persons[personIndex])
+
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    person[personIndex] = person;
+
+    this.setState( {persons: persons} )
   }
 
   deletePersonHandler = (personIndex) => {
@@ -54,7 +60,8 @@ class App extends Component {
          click={() => this.deletePersonHandler(index)}
          name={person.name}
          age={person.age}
-         key={person.id}/>//key needs to be unique so use or make an id
+         key={person.id}//key needs to be unique so use or make an id
+         changed={(event) => this.nameChangedHandler(event, person.id)}/>
        })}
        </div>
     )}
