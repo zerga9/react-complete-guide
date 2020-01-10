@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -48,7 +49,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer', //you can't hoover because it is a css pseudo-selector
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      } //this is possible because of Radium, be sure to put it in quotation-marks
     };
 
     let persons = null; //create variables to use in your jsx
@@ -67,6 +72,10 @@ class App extends Component {
        </div>
     );
     style.backgroundColor = 'red';
+    style[':hover'] = {
+      backgroundColor: 'salmon',
+      color: 'black'
+    }
   }
 
     let classes = [];
@@ -92,4 +101,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
